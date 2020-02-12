@@ -1,18 +1,31 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>{{pokemon.name}}</p>
+    <p>{{skill.run}}</p>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  computed : {
+    ...mapState([
+      'pokemon'
+    ]),
+    ...mapGetters([
+      'skill'
+    ])
+  },
+  methods : {
+    ...mapActions([
+      'nombrarPokemon'
+    ])
+  },
+  mounted(){
+    //Se pueden enviar diferentes tipos de datos, solamente hacer el cambio correcto en las mutaciones
+    this.nombrarPokemon({ name : 'charmander', skill : 'fire'});
   }
+
 }
 </script>
